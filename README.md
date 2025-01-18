@@ -7,6 +7,7 @@ Features:
 - Zero `dependencies`, minimal `devDependencies`:
   - [TypeScript](https://www.typescriptlang.org/): Modern, de facto flavor of JavaScript
   - [Vitest](https://vitest.dev/): Next generation testing framework with out-of-the-box TypeScript support. Easily replace this with Jest should you wish to
+- CI via GitHub actions
 
 This is not a library. You're supposed to clone this repository, use it as a **starting point** and customize it to your liking.
 
@@ -34,13 +35,14 @@ Why? Because there are a number to choose from and you can easily add them yours
 - `npm test`: Single test run using Vitest
 - `npm test:watch`: Watch mode. Runs all test suites and reruns them when there are changes
 - `npm run build`: Compiles `src` into JavaScript and TypeScript definitions into `dist` directory
-- `npm run ci`: Checks code + runs test + build. Suitable for running in CI environments
+- `npm run ci`: Checks code + runs test + build. Suitable for running locally when developing and in CI environments
 - `npm run clean`: Deletes the `dist` directory
 - `npm run release`: Publish to npm directory. Published only if `npm run ci` is successful
 
 ## Directory walkthrough
 
 ```
+├── .github/workflows/ci.yml
 ├── dist
 ├── src
 │   ├── __tests__
@@ -59,3 +61,4 @@ Why? Because there are a number to choose from and you can easily add them yours
 - `tsconfig.json`: Base TypeScript config. Used when developing
 - `tsconfig.build.json`: TypeScript config used when building, emits build artifacts within `dist`
 - `dist`: Directory containing generated files. The contents of this directory is published
+- `.github/workflows/ci.yml`: GitHub action that runs typechecking and tests
