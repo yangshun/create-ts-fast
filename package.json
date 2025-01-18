@@ -1,5 +1,5 @@
 {
-  "name": "@yangshun/npm-ts-boilerplate",
+  "name": "@yangshun/npm-typescript-boilerplate",
   "version": "0.0.5",
   "description": "Boilerplate for building npm packages in TypeScript",
   "author": "yangshun",
@@ -9,9 +9,11 @@
   "scripts": {
     "build": "tsc --project ./tsconfig.build.json",
     "check": "tsc",
+    "ci": "npm run check && npm run test && npm run build",
     "clean": "rimraf dist",
-    "test": "vitest",
-    "release": "npm run clean && npm run check && npm run build && npm publish --access public"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "release": "npm run ci && npm publish --access public"
   },
   "files": [
     "dist"
