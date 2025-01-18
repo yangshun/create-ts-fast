@@ -1,12 +1,10 @@
 {
   "compilerOptions": {
     "strict": true,
-    "declaration": true,
     "moduleResolution": "node",
-    "outDir": "dist",
     "skipLibCheck": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "noEmit": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "**/__tests__/*"]
+  "include": ["src"]
 }
