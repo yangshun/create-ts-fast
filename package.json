@@ -1,0 +1,25 @@
+{
+  "name": "@yangshun/npm-ts-boilerplate",
+  "version": "0.0.1",
+  "private": false,
+  "description": "Boilerplate for building npm packages in TypeScript",
+  "author": "yangshun",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "npm test"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "typescript",
+    "npm",
+    "boilerplate"
+  ],
+  "dependencies": {
+    "typescript": "^5.7.3"
+  }
+}
