@@ -1,7 +1,6 @@
 {
   "name": "@yangshun/npm-ts-boilerplate",
-  "version": "0.0.1",
-  "private": false,
+  "version": "0.0.4",
   "description": "Boilerplate for building npm packages in TypeScript",
   "author": "yangshun",
   "license": "MIT",
@@ -9,7 +8,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "npm test"
+    "test": "vitest",
+    "release": "npm run build && npm publish --access public"
   },
   "files": [
     "dist"
@@ -19,7 +19,8 @@
     "npm",
     "boilerplate"
   ],
-  "dependencies": {
-    "typescript": "^5.7.3"
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.2"
   }
 }
