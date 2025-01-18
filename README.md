@@ -1,16 +1,19 @@
 # npm TypeScript Boilerplate
 
-Unopinionated boilerplate for creating npm packages in TypeScript. Contains just enough features to help you author and publish a TypeScript-based npm package in under 15 minutes.
+Unopinionated boilerplate for creating npm packages like [`axios`](https://github.com/axios/axios), [`lodash`](https://github.com/lodash/lodash), [`clsx`](https://github.com/lukeed/clsx), [`zod`](https://github.com/colinhacks/zod) using TypeScript.
 
 ## Features
+
+Contains just enough features to help you author and publish TypeScript-based npm packages in under 15 minutes. Features include:
 
 - **Lean and mean**: **Zero `dependencies`, minimal `devDependencies`**
   - [TypeScript](https://www.typescriptlang.org/): Modern, de facto flavor of JavaScript
   - [Vitest](https://vitest.dev/): Next generation testing framework with out-of-the-box TypeScript support. Easily replace this with Jest should you wish to
 - **Unopinionated**: Includes only the absolute necessary dependencies to get you started
+- **Types generation**: Type definitions will be automatically generated
 - **Continuous integration**: Test, run typechecks, and build on every commit / pull request. Uses GitHub actions
 
-### Unopinionated
+### Where's pnpm, ESLint, Prettier, and &lt;favorite library&gt;?
 
 This boilerplate does not have opinions on the following:
 
@@ -19,20 +22,23 @@ This boilerplate does not have opinions on the following:
 - Formatting, e.g Prettier, Biome
 - Alternative runtimes e.g. Bun, Deno
 
-Why? Because there are a number to choose from and you can easily add them yourself. If/when one of them becomes the standard (e.g. how TypeScript has won), then we can including them as part of the boilerplate.
+Why? Because no matter the choice, someone will have an opinion and want to use something else, so we rather leave it to you. Moreover, these tools can be easily added yourself.
+
+If/when one of them becomes the standard (e.g. TypeScript), we can then include them as part of the boilerplate.
 
 ## How to use
 
-This is not a library. You're supposed to clone this repository, use it as a **starting point** and **customize** it to your liking.
+This is not a library. You're supposed to clone the code, use it as a **starting point** and **customize** it to your liking.
 
-Go from zero to npm hero in 6 steps:
+Go from zero to npm hero in 7 steps:
 
-1. Clone this repository
-2. Implement your library within `src`
-3. Modify `package.json` – update `name`, `version`, `author` and any other relevant fields
-4. Update `README.md`
-5. `npm run publish`
-6. Profit!
+1. Click "Use this template" at the top right of the repo homepage to create a clone of the repo template
+2. Clone your new repo to your computer. **Do not clone this repository!**
+3. Implement your library within `src`. Add tests if you take pride in being a developer
+4. Modify `package.json` – update `name`, `version`, `author` and any other relevant fields
+5. Update `README.md`
+6. `npm run publish`. You will have to login to npm if you aren't already logged in
+7. Profit!
 
 ## Commands
 
@@ -66,4 +72,4 @@ Go from zero to npm hero in 6 steps:
 - `tsconfig.json`: Base TypeScript config. Used when developing
 - `tsconfig.build.json`: TypeScript config used when building, emits build artifacts within `dist`
 - `dist`: Directory containing generated files. The contents of this directory is published
-- `.github/workflows/ci.yml`: GitHub action that runs typechecks and tests
+- `.github/workflows/ci.yml`: GitHub action that runs typechecks, tests and build
