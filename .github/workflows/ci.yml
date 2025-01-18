@@ -1,5 +1,4 @@
-name: CI Pipeline
-
+name: Continuous integration
 on:
   push:
     branches:
@@ -12,41 +11,29 @@ jobs:
     name: Typecheck
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 22
-      - name: Install dependencies
-        run: npm install
-      - name: Run TypeScript type-checking
-        run: npm run check
+      - run: npm install
+      - run: npm run check
   tests:
     name: Tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 22
-      - name: Install dependencies
-        run: npm install
-      - name: Run tests
-        run: npm test
+      - run: npm install
+      - run: npm test
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 22
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
+      - run: npm install
+      - run: npm run build
