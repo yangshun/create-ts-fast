@@ -73,3 +73,15 @@ Go from zero to npm hero in 7 steps:
 - `tsconfig.build.json`: TypeScript config used when building, emits build artifacts within `dist`
 - `dist`: Directory containing generated files. The contents of this directory is published
 - `.github/workflows/ci.yml`: GitHub action that runs typechecks, tests and build
+
+## Roadmap
+
+- [ ] Installer similar to T3 app and Create React App
+- [ ] Multiple output formats (esm, cjs, mjs)
+- [ ] Choose between tools (Jest vs Vitest)
+
+## Credits and inspiration
+
+- [tsup](https://github.com/egoist/tsup)
+- [tsdx](https://github.com/jaredpalmer/tsdx)
+- [microbundle](https://github.com/developit/microbundle)
