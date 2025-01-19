@@ -1,0 +1,36 @@
+{
+  "name": "create-ts-fast",
+  "version": "0.0.1",
+  "description": "Create TypeScript packages really fast",
+  "author": "yangshun",
+  "license": "MIT",
+  "main": "index.js",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "bin": {
+    "create-t3-fast": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "template"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rimraf dist",
+    "release": "pnpm build && npm publish"
+  },
+  "keywords": [
+    "typescript",
+    "npm",
+    "library",
+    "package",
+    "boilerplate"
+  ],
+  "dependencies": {
+    "@types/node": "^22.10.7",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3"
+  }
+}
