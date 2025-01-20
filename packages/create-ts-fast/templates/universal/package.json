@@ -1,8 +1,7 @@
 {
-  "name": "@yangshun/npm-typescript-boilerplate",
-  "version": "0.0.5",
+  "name": "ts-fast-universal",
+  "version": "0.0.0",
   "description": "Boilerplate for building npm packages in TypeScript",
-  "author": "yangshun",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,15 +12,10 @@
     "clean": "rimraf dist",
     "test": "vitest run",
     "test:watch": "vitest",
-    "release": "npm run ci && npm publish --access public"
+    "release": "npm run ci && npm publish"
   },
   "files": [
     "dist"
-  ],
-  "keywords": [
-    "typescript",
-    "npm",
-    "boilerplate"
   ],
   "devDependencies": {
     "rimraf": "^6.0.1",
