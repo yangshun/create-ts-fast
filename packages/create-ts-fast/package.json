@@ -1,6 +1,6 @@
 {
   "name": "create-ts-fast",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Create TypeScript packages really fast",
   "author": "yangshun",
   "license": "MIT",
@@ -18,7 +18,7 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "clean": "rimraf dist",
-    "release": "pnpm build && npm publish"
+    "prepublish": "pnpm build"
   },
   "keywords": [
     "typescript",

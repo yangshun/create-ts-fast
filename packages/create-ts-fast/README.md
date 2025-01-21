@@ -4,6 +4,10 @@ Tool for creating universal npm packages (intended to run on both server and cli
 
 Think Create React App for TypeScript-based npm packages.
 
+```sh
+npm create ts-fast@latest
+```
+
 ## Features
 
 Contains just enough features to help you author and publish TypeScript-based npm packages in under 15 minutes. Features include:
@@ -17,7 +21,7 @@ Contains just enough features to help you author and publish TypeScript-based np
 
 ### Where's pnpm, ESLint, Prettier, and &lt;trendy library&gt;?
 
-This boilerplate does not have opinions on the following:
+The project is unopinionated about the following:
 
 - Alternative package managers, e.g. pnpm, Yarn
 - Linting, e.g. ESLint, Biome, oxlint
@@ -26,13 +30,13 @@ This boilerplate does not have opinions on the following:
 
 Why? Because no matter the choice, someone will have a different opinion and want to use something else, so we rather leave it to you. Moreover, these tools can be easily added yourself.
 
-If/when one of them becomes the standard (e.g. TypeScript), we can then include them as part of the boilerplate.
+If/when one of them becomes the standard (e.g. TypeScript), we can then include them as a default.
 
 ## Getting started
 
 Run the scaffolding command, use the scaffolded project as a **starting point** and **customize** it to your liking.
 
-Go from zero to hero in a few steps:
+Go from zero to hero in a few steps. Start by running the scaffold command:
 
 ```sh
 npm create ts-fast@latest
