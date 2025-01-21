@@ -1,6 +1,8 @@
 # Create TypeScript Fast
 
-Unopinionated boilerplate for creating npm packages like [`axios`](https://github.com/axios/axios), [`lodash`](https://github.com/lodash/lodash), [`clsx`](https://github.com/lukeed/clsx), [`zod`](https://github.com/colinhacks/zod) using TypeScript.
+Tool for creating universal npm packages (intended to run on both server and client) using TypeScript, like [`axios`](https://github.com/axios/axios), [`lodash`](https://github.com/lodash/lodash), [`clsx`](https://github.com/lukeed/clsx), [`zod`](https://github.com/colinhacks/zod).
+
+Think Create React App for TypeScript-based npm packages.
 
 ## Features
 
@@ -13,32 +15,36 @@ Contains just enough features to help you author and publish TypeScript-based np
 - **Types generation**: Type definitions will be automatically generated
 - **Continuous integration**: Test, run typechecks, and build on every commit / pull request. Uses GitHub actions
 
-### Where's pnpm, ESLint, Prettier, and &lt;favorite library&gt;?
+### Where's pnpm, ESLint, Prettier, and &lt;trendy library&gt;?
 
 This boilerplate does not have opinions on the following:
 
 - Alternative package managers, e.g. pnpm, Yarn
-- Linting, e.g. ESLint, Biome
+- Linting, e.g. ESLint, Biome, oxlint
 - Formatting, e.g Prettier, Biome
 - Alternative runtimes e.g. Bun, Deno
 
-Why? Because no matter the choice, someone will have an opinion and want to use something else, so we rather leave it to you. Moreover, these tools can be easily added yourself.
+Why? Because no matter the choice, someone will have a different opinion and want to use something else, so we rather leave it to you. Moreover, these tools can be easily added yourself.
 
 If/when one of them becomes the standard (e.g. TypeScript), we can then include them as part of the boilerplate.
 
-## How to use
+## Getting started
 
-This is not a library. You're supposed to clone the code, use it as a **starting point** and **customize** it to your liking.
+Run the scaffolding command, use the scaffolded project as a **starting point** and **customize** it to your liking.
 
-Go from zero to npm hero in 7 steps:
+Go from zero to hero in a few steps:
 
-1. Click "Use this template" at the top right of the repo homepage to create a clone of the repo template
-2. Clone your new repo to your computer. **Do not clone this repository!**
-3. Implement your library within `src`. Add tests if you take pride in being a developer
-4. Modify `package.json` – update `name`, `version`, `author` and any other relevant fields
-5. Update `README.md`
-6. `npm run publish`. You will have to login to npm if you aren't already logged in
-7. Profit!
+```sh
+npm create ts-fast@latest
+```
+
+After scaffolding:
+
+1. Implement your library within `src`. Add tests if you take pride in being a developer
+2. Modify `package.json` – update `name`, `version`, `author` and any other relevant fields
+3. Update `README.md`
+4. `npm run publish`. You will have to login to npm if you aren't already logged in
+5. Profit!
 
 ## Commands
 
@@ -58,7 +64,6 @@ Go from zero to npm hero in 7 steps:
 ├── src
 │   ├── __tests__
 │   └── index.ts
-├── package-lock.json
 ├── package.json
 ├── README.md
 ├── tsconfig.json
@@ -76,12 +81,14 @@ Go from zero to npm hero in 7 steps:
 
 ## Roadmap
 
-- [ ] Installer similar to T3 app and Create React App
+- [x] Scaffolding command to create-t3-app and create-react-app
 - [ ] Multiple output formats (esm, cjs, mjs)
 - [ ] Choose between tools (Jest vs Vitest)
 
 ## Credits and inspiration
 
+- [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite)
+- [create-t3-app](https://github.com/t3-oss/create-t3-app)
 - [tsup](https://github.com/egoist/tsup)
-- [tsdx](https://github.com/jaredpalmer/tsdx)
 - [microbundle](https://github.com/developit/microbundle)
+- [tsdx](https://github.com/jaredpalmer/tsdx)
