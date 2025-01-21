@@ -36,15 +36,35 @@ If/when one of them becomes the standard (e.g. TypeScript), we can then include 
 
 Run the scaffolding command, use the scaffolded project as a **starting point** and **customize** it to your liking.
 
-Go from zero to hero in a few steps. Start by running the scaffold command:
+Start by running the appropriate command and answering a few questions:
+
+### npm
 
 ```sh
 npm create ts-fast@latest
 ```
 
-### Directory walkthrough
+### Yarn
 
-The scaffolded project will have the following files:
+```sh
+yarn create ts-fast
+```
+
+### pnpm
+
+```sh
+pnpm create ts-fast@latest
+```
+
+### bun
+
+```sh
+bun create ts-fast@latest
+```
+
+### Scaffolded project
+
+The scaffolded project will have the following base files:
 
 ```
 ├── .github/workflows/ci.yml
@@ -76,19 +96,9 @@ The scaffolded project will have the following files:
 4. `npm run publish`. You will have to login to npm if you aren't already logged in
 5. Profit!
 
-## Commands
-
-- `npm run check`: Checks code within `src` for TypeScript issues. No artifacts are generated
-- `npm test`: Single test run using Vitest
-- `npm test:watch`: Watch mode. Runs all test suites and reruns them when there are changes
-- `npm run build`: Compiles `src` into JavaScript and TypeScript definitions into `dist` directory
-- `npm run ci`: Run typechecks + run tests + build. Suitable for running locally when developing and in CI environments
-- `npm run clean`: Deletes the `dist` directory
-- `npm run release`: Publish to npm directory. Published only if `npm run ci` is successful
-
 ## Roadmap
 
-- [x] Scaffolding command similar to create-t3-app and create-react-app
+- [x] Scaffolding command similar to `create-vite` and `create-react-app`
 - [ ] Multiple output formats (esm, cjs, mjs)
 - [ ] Choose between tools (Jest vs Vitest)
 
