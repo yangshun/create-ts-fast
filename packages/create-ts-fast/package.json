@@ -1,14 +1,13 @@
 {
   "name": "create-ts-fast",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Create TypeScript packages really fast",
   "author": "yangshun",
   "license": "MIT",
-  "main": "index.js",
   "type": "module",
   "exports": "./dist/index.js",
   "bin": {
-    "create-t3-fast": "./dist/index.js"
+    "create-ts-fast": "./dist/index.js"
   },
   "files": [
     "dist",
