@@ -42,7 +42,33 @@ Go from zero to hero in a few steps. Start by running the scaffold command:
 npm create ts-fast@latest
 ```
 
-After scaffolding:
+### Directory walkthrough
+
+The scaffolded project will have the following files:
+
+```
+├── .github/workflows/ci.yml
+├── dist
+├── src
+│   ├── __tests__
+│   └── index.ts
+├── package.json
+├── README.md
+├── tsconfig.json
+└── tsconfig.build.json
+```
+
+- `src`: Contains source code
+  - `__tests__`: Directory containing tests. Code within `__tests__` will be ignored during build
+  - `index.ts`: Main file
+- `package.json`: Self explanatory
+- `README.md`: Project's README file. Contents will be displayed on the package homepage on npmjs.com and repo homepage of github.com
+- `tsconfig.json`: Base TypeScript config. Used when developing
+- `tsconfig.build.json`: TypeScript config used when building, emits build artifacts within `dist`
+- `dist`: Directory containing generated files. The contents of this directory is published
+- `.github/workflows/ci.yml`: GitHub action that runs typechecks, tests and build
+
+### Next steps
 
 1. Implement your library within `src`. Add tests if you take pride in being a developer
 2. Modify `package.json` – update `name`, `version`, `author` and any other relevant fields
@@ -60,32 +86,9 @@ After scaffolding:
 - `npm run clean`: Deletes the `dist` directory
 - `npm run release`: Publish to npm directory. Published only if `npm run ci` is successful
 
-## Directory walkthrough
-
-```
-├── .github/workflows/ci.yml
-├── dist
-├── src
-│   ├── __tests__
-│   └── index.ts
-├── package.json
-├── README.md
-├── tsconfig.json
-└── tsconfig.build.json
-```
-
-- `src`: Contains source code
-  - `__tests__`: For writing tests. Code within `__tests__` will be ignored during build
-- `package.json`: Self explanatory
-- `README.md`: Project's README file. Contents will be displayed on the package homepage on npmjs.com and repo homepage of github.com
-- `tsconfig.json`: Base TypeScript config. Used when developing
-- `tsconfig.build.json`: TypeScript config used when building, emits build artifacts within `dist`
-- `dist`: Directory containing generated files. The contents of this directory is published
-- `.github/workflows/ci.yml`: GitHub action that runs typechecks, tests and build
-
 ## Roadmap
 
-- [x] Scaffolding command to create-t3-app and create-react-app
+- [x] Scaffolding command similar to create-t3-app and create-react-app
 - [ ] Multiple output formats (esm, cjs, mjs)
 - [ ] Choose between tools (Jest vs Vitest)
 
