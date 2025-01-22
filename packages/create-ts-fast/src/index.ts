@@ -6,10 +6,10 @@ import minimist from 'minimist';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import colors from 'picocolors';
+import chalk from 'chalk';
 import prompts from 'prompts';
 
-const { red, reset, white } = colors;
+const { red, reset, white } = chalk;
 
 const argv = minimist<{
   template?: string;
