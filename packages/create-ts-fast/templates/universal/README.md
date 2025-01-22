@@ -33,15 +33,14 @@ The project has the following files and directories:
 1. Implement your library within `src`. Add tests if you take pride in being a developer
 2. Modify `package.json` – update `name`, `version`, `author` and any other relevant fields
 3. Update `README.md`
-4. `npm run publish`. You will have to login to npm if you aren't already logged in
+4. `npm publish`. You will have to login to npm if you aren't already logged in
 5. Profit!
 
 ## Commands
 
 - `npm run check`: Checks code within `src` for TypeScript issues. No artifacts are generated
 - `npm test`: Single test run using Vitest
-- `npm test:watch`: Watch mode. Runs all test suites and reruns them when there are changes
+- `npm run test:watch`: Watch mode. Runs all test suites and reruns them when there are changes
 - `npm run build`: Compiles `src` into JavaScript and TypeScript definitions into `dist` directory
 - `npm run ci`: Run typechecks + run tests + build. Suitable for running locally when developing and in CI environments
 - `npm run clean`: Deletes the `dist` directory
-- `npm run release`: Publish to npm registry. Published only if `npm run ci` is successful
