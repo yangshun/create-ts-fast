@@ -8,11 +8,11 @@
   "scripts": {
     "build": "tsc --project ./tsconfig.build.json",
     "check": "tsc",
-    "ci": "npm run check && npm run test && npm run build",
     "clean": "rimraf dist",
     "test": "vitest run",
     "test:watch": "vitest",
-    "prepublish": "npm run ci"
+    "verify": "npm run check && npm run test && npm run build",
+    "prepublishOnly": "npm run verify"
   },
   "files": [
     "dist"
@@ -21,5 +21,8 @@
     "rimraf": "^6.0.1",
     "typescript": "^5.7.3",
     "vitest": "^3.0.2"
+  },
+  "engines": {
+    "node": "^20.0.0 || >=22.0.0"
   }
 }

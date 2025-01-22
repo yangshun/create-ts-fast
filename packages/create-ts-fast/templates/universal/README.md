@@ -42,5 +42,5 @@ The project has the following files and directories:
 - `npm test`: Single test run using Vitest
 - `npm run test:watch`: Watch mode. Runs all test suites and reruns them when there are changes
 - `npm run build`: Compiles `src` into JavaScript and TypeScript definitions into `dist` directory
-- `npm run ci`: Run typechecks + run tests + build. Suitable for running locally when developing and in CI environments
+- `npm run verify`: Run typechecks + run tests + build. Suitable when developing and in CI environments to ensure all checks are valid
 - `npm run clean`: Deletes the `dist` directory
