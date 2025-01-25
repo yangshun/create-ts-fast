@@ -26,7 +26,8 @@ const renameFiles: Record<string, string | undefined> = {
 
 const defaultTargetDir = 'ts-fast-project';
 
-const TEMPLATES = ['universal'];
+// TODO: read from file system
+const TEMPLATES = ['universal', 'react-hooks'];
 
 async function main() {
   const argTargetDir = formatTargetDir(argv._[0]);
@@ -104,7 +105,7 @@ async function main() {
               ? reset(
                   `"${argTemplate}" isn't a valid template. Please choose from below: `,
                 )
-              : reset('Select a framework:'),
+              : reset('Select a template:'),
           initial: 0,
           choices: TEMPLATES.map((template) => {
             return {
