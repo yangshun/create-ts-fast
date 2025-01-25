@@ -15,7 +15,8 @@ The project has the following files and directories:
 ├── package.json
 ├── README.md
 ├── tsconfig.json
-└── tsup.config.json
+├── tsup.config.ts
+└── vitest.config.ts
 ```
 
 - `src`: Contains source code
@@ -25,6 +26,7 @@ The project has the following files and directories:
 - `README.md`: Project's README file. Contents will be displayed on the package homepage on npmjs.com and repo homepage of github.com
 - `tsconfig.json`: Base TypeScript config. Used when developing
 - `tsup.config.json`: tsup config. Refer to its [documentation for customization](https://tsup.egoist.dev/#using-custom-configuration)
+- `vitest.config.ts`: Vitest config. Refer to its [documentation for customization](https://vitest.dev/config/)
 - `dist`: Directory containing generated files. The contents of this directory is published
 - `.github/workflows/ci.yml`: GitHub action that runs typechecks, tests and build
 
