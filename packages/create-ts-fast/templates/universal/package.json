@@ -4,9 +4,17 @@
   "description": "Boilerplate for building npm packages in TypeScript",
   "license": "MIT",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
   "scripts": {
-    "build": "tsc --project ./tsconfig.build.json",
+    "build": "tsup",
     "check": "tsc",
     "clean": "rimraf dist",
     "test": "vitest run",
@@ -19,6 +27,7 @@
   ],
   "devDependencies": {
     "rimraf": "^6.0.1",
+    "tsup": "^8.3.6",
     "typescript": "^5.7.3",
     "vitest": "^3.0.2"
   },

@@ -15,7 +15,8 @@ Contains just enough features to help you author and publish TypeScript-based np
 - **Lean and mean**: **Zero `dependencies`, minimal `devDependencies`**
   - [TypeScript](https://www.typescriptlang.org/): Modern, de facto flavor of JavaScript
   - [Vitest](https://vitest.dev/): Next generation testing framework with out-of-the-box TypeScript support. Easily replace this with Jest should you wish to
-- **Unopinionated**: Includes only the absolute necessary dependencies to get you started
+  - [tsup](https://tsup.egoist.dev/): Bundles your TypeScript code, powered by [esbuild](https://esbuild.github.io/)
+- **Unopinionated**: Includes only the necessary dependencies to get you started
 - **Types generation**: Type definitions will be automatically generated
 - **Continuous integration**: Test, run typechecks, and build on every commit / pull request. Uses GitHub actions
 
@@ -75,7 +76,7 @@ The scaffolded project will have the following base files:
 ├── package.json
 ├── README.md
 ├── tsconfig.json
-└── tsconfig.build.json
+└── tsup.config.json
 ```
 
 - `src`: Contains source code
@@ -84,7 +85,7 @@ The scaffolded project will have the following base files:
 - `package.json`: Self explanatory
 - `README.md`: Project's README file. Contents will be displayed on the package homepage on npmjs.com and repo homepage of github.com
 - `tsconfig.json`: Base TypeScript config. Used when developing
-- `tsconfig.build.json`: TypeScript config used when building, emits build artifacts within `dist`
+- `tsup.config.json`: tsup config. Refer to its [documentation for customization](https://tsup.egoist.dev/#using-custom-configuration)
 - `dist`: Directory containing generated files. The contents of this directory is published
 - `.github/workflows/ci.yml`: GitHub action that runs typechecks, tests and build
 
@@ -99,7 +100,7 @@ The scaffolded project will have the following base files:
 ## Roadmap
 
 - [x] Scaffolding command similar to `create-vite` and `create-react-app`
-- [ ] Multiple output formats (esm, cjs, mjs)
+- [x] Multiple output formats (esm, cjs)
 - [ ] Choose between tools (Jest vs Vitest)
 
 ## Credits and inspiration

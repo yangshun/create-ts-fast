@@ -15,7 +15,7 @@ The project has the following files and directories:
 ├── package.json
 ├── README.md
 ├── tsconfig.json
-└── tsconfig.build.json
+└── tsup.config.json
 ```
 
 - `src`: Contains source code
@@ -24,7 +24,7 @@ The project has the following files and directories:
 - `package.json`: Self explanatory
 - `README.md`: Project's README file. Contents will be displayed on the package homepage on npmjs.com and repo homepage of github.com
 - `tsconfig.json`: Base TypeScript config. Used when developing
-- `tsconfig.build.json`: TypeScript config used when building, emits build artifacts within `dist`
+- `tsup.config.json`: tsup config. Refer to its [documentation for customization](https://tsup.egoist.dev/#using-custom-configuration)
 - `dist`: Directory containing generated files. The contents of this directory is published
 - `.github/workflows/ci.yml`: GitHub action that runs typechecks, tests and build
 
@@ -41,6 +41,6 @@ The project has the following files and directories:
 - `npm run check`: Checks code within `src` for TypeScript issues. No artifacts are generated
 - `npm test`: Single test run using Vitest
 - `npm run test:watch`: Watch mode. Runs all test suites and reruns them when there are changes
-- `npm run build`: Compiles `src` into JavaScript and TypeScript definitions into `dist` directory
+- `npm run build`: Compiles `src` into CommonJS, ES modules, and TypeScript definitions into the `dist` directory
 - `npm run verify`: Run typechecks + run tests + build. Suitable when developing and in CI environments to ensure all checks are valid
 - `npm run clean`: Deletes the `dist` directory
