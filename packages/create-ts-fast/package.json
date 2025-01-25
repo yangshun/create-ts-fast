@@ -1,6 +1,6 @@
 {
   "name": "create-ts-fast",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Create TypeScript packages really fast",
   "author": "yangshun",
   "license": "MIT",
