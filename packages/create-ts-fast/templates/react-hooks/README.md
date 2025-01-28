@@ -40,9 +40,9 @@ The project has the following files and directories:
 
 ## Commands
 
-- `npm run check`: Checks code within `src` for TypeScript issues. No artifacts are generated
+- `npm run typecheck`: Checks code within `src` for TypeScript issues. No artifacts are generated
 - `npm test`: Single test run using Vitest
 - `npm run test:watch`: Watch mode. Runs all test suites and reruns them when there are changes
-- `npm run build`: Compiles `src` into CommonJS, ES modules, and TypeScript definitions into the `dist` directory
-- `npm run verify`: Run typechecks + run tests + build. Suitable when developing and in CI environments to ensure all checks are valid
+- `npm run build`: Compiles `src` into CommonJS and ES modules (along with TypeScript declarations files) into the `dist` directory
+- `npm run verify`: Run typechecks + tests + build. Suitable when developing and in CI environments to ensure all checks are valid
 - `npm run clean`: Deletes the `dist` directory

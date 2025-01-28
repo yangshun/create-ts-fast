@@ -1,12 +1,15 @@
 # Create TypeScript Fast
 
-Tool for creating universal npm packages (intended to run on both server and client) using TypeScript, like [`axios`](https://github.com/axios/axios), [`lodash`](https://github.com/lodash/lodash), [`clsx`](https://github.com/lukeed/clsx), [`zod`](https://github.com/colinhacks/zod).
-
-Think Create React App for TypeScript-based npm packages.
+Create React App but for creating TypeScript-based packages to be published to the npm registry.
 
 ```sh
 npm create ts-fast@latest
 ```
+
+Currently supported templates:
+
+- **Universal**: Platform-agnostic utilities intended to run on both server and client (e.g. [`axios`](https://github.com/axios/axios), [`lodash`](https://github.com/lodash/lodash), [`clsx`](https://github.com/lukeed/clsx), [`zod`](https://github.com/colinhacks/zod))
+- **React hooks**: Custom React hooks (e.g. [`react-use`](https://github.com/streamich/react-use), [`usehooks-ts`](https://github.com/juliencrn/usehooks-ts))
 
 ## Features
 
@@ -17,8 +20,8 @@ Contains just enough features to help you author and publish TypeScript-based np
   - [Vitest](https://vitest.dev/): Next generation testing framework with out-of-the-box TypeScript support. Easily replace this with Jest should you wish to
   - [tsup](https://tsup.egoist.dev/): Bundles your TypeScript code, powered by [esbuild](https://esbuild.github.io/)
 - **Unopinionated**: Includes only the necessary dependencies to get you started
-- **Types generation**: Type definitions will be automatically generated
-- **Continuous integration**: Test, run typechecks, and build on every commit / pull request. Uses GitHub actions
+- **Types generation**: Type declaration files are automatically generated
+- **Continuous integration**: Test, typecheck, and build on every commit / pull request. Uses GitHub actions
 
 ### Where's pnpm, ESLint, Prettier, and &lt;trendy library&gt;?
 
@@ -63,9 +66,9 @@ pnpm create ts-fast@latest
 bun create ts-fast@latest
 ```
 
-### Scaffolded project
+### Scaffolded project structure
 
-The scaffolded project will have the following base files:
+Scaffolded projects have these few base files:
 
 ```
 ├── .github/workflows/ci.yml
@@ -76,18 +79,9 @@ The scaffolded project will have the following base files:
 ├── package.json
 ├── README.md
 ├── tsconfig.json
-└── tsup.config.json
+├── tsup.config.ts
+└── vitest.config.ts
 ```
-
-- `src`: Contains source code
-  - `__tests__`: Directory containing tests. Code within `__tests__` will be ignored during build
-  - `index.ts`: Main file
-- `package.json`: Self explanatory
-- `README.md`: Project's README file. Contents will be displayed on the package homepage on npmjs.com and repo homepage of github.com
-- `tsconfig.json`: Base TypeScript config. Used when developing
-- `tsup.config.json`: tsup config. Refer to its [documentation for customization](https://tsup.egoist.dev/#using-custom-configuration)
-- `dist`: Directory containing generated files. The contents of this directory is published
-- `.github/workflows/ci.yml`: GitHub action that runs typechecks, tests and build
 
 ### Next steps
 

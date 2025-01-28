@@ -23,11 +23,11 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "check": "tsc",
     "clean": "rimraf dist",
     "test": "vitest run",
     "test:watch": "vitest",
-    "verify": "npm run check && npm run test && npm run build",
+    "typecheck": "tsc",
+    "verify": "npm run typecheck && npm run test && npm run build",
     "prepublishOnly": "npm run verify"
   },
   "files": [

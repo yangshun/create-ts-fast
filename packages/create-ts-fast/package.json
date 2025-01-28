@@ -16,8 +16,8 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "check": "tsc",
-    "verify": "pnpm run check && pnpm run build",
+    "typecheck": "tsc",
+    "verify": "pnpm run typecheck && pnpm run build",
     "clean": "rimraf dist",
     "prepublishOnly": "pnpm verify"
   },

@@ -22,11 +22,11 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsup",
-    "check": "tsc",
+    "typecheck": "tsc",
     "clean": "rimraf dist",
     "test": "vitest run",
     "test:watch": "vitest",
-    "verify": "npm run check && npm run test && npm run build",
+    "verify": "npm run typecheck && npm run test && npm run build",
     "prepublishOnly": "npm run verify"
   },
   "files": [
