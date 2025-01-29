@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/yangshun/create-ts-fast/main/packages/create-ts-fast/assets/logo.png" alt="Create TS Fast Logo" />
+
 # Create TypeScript Fast
 
 Create React App but for creating TypeScript-based packages to be published to the npm registry.
