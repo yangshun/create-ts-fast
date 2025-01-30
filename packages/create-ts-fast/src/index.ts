@@ -9,6 +9,15 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import chalk from 'chalk';
 import prompts from 'prompts';
+import {
+  copy,
+  formatTargetDir,
+  isEmptyDir,
+  isValidPackageName,
+  pkgFromUserAgent,
+  rmdirPreserveGit,
+  toValidPackageName,
+} from './utils';
 
 const { red, reset, white } = chalk;
 
@@ -136,7 +145,7 @@ async function main() {
       : path.join(cwd, targetDir);
 
   if (overwrite === 'yes') {
-    rmdir(root);
+    rmdirPreserveGit(root);
   } else if (!fs.existsSync(root)) {
     fs.mkdirSync(root, { recursive: true });
   }
@@ -162,11 +171,13 @@ async function main() {
     }
   }
 
+  // Copy files from template to target dir
   const files = fs.readdirSync(templateDir);
   for (const file of files.filter((file_) => file_ !== 'package.json')) {
     write(file);
   }
 
+  // Write package.json to target dir
   const pkg = JSON.parse(
     fs.readFileSync(path.join(templateDir, `package.json`), 'utf-8'),
   );
@@ -176,6 +187,7 @@ async function main() {
   try {
     const name = execSync('git config user.name').toString().trim();
     const email = execSync('git config user.email').toString().trim();
+
     if (name) {
       pkg.author = email ? `${name} <${email}>` : name;
     }
@@ -195,6 +207,7 @@ async function main() {
       }`,
     );
   }
+
   switch (pkgManager) {
     case 'yarn':
       console.log('  yarn');
@@ -227,73 +240,3 @@ try {
 }
 
 export {};
-
-function formatTargetDir(targetDir: string | undefined) {
-  return targetDir?.trim().replace(/\/+$/g, '');
-}
-
-function copy(src: string, dest: string) {
-  const stat = fs.statSync(src);
-  if (stat.isDirectory()) {
-    copyDir(src, dest);
-  } else {
-    fs.copyFileSync(src, dest);
-  }
-}
-
-function isValidPackageName(projectName: string) {
-  return /^(?:@[a-z\d\-*~][a-z\d\-*._~]*\/)?[a-z\d\-~][a-z\d\-._~]*$/.test(
-    projectName,
-  );
-}
-
-function toValidPackageName(projectName: string) {
-  return projectName
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/^[._]/, '')
-    .replace(/[^a-z\d\-~]+/g, '-');
-}
-
-function copyDir(srcDir: string, destDir: string) {
-  fs.mkdirSync(destDir, { recursive: true });
-  for (const file of fs.readdirSync(srcDir)) {
-    const srcFile = path.resolve(srcDir, file);
-    const destFile = path.resolve(destDir, file);
-    copy(srcFile, destFile);
-  }
-}
-
-function isEmptyDir(path: string) {
-  const files = fs.readdirSync(path);
-  return files.length === 0 || (files.length === 1 && files[0] === '.git');
-}
-
-function pkgFromUserAgent(userAgent: string | undefined) {
-  if (!userAgent) {
-    return undefined;
-  }
-
-  const pkgSpec = userAgent.split(' ')[0];
-  const pkgSpecArr = pkgSpec.split('/');
-
-  return {
-    name: pkgSpecArr[0],
-    version: pkgSpecArr[1],
-  };
-}
-
-function rmdir(dir: string) {
-  if (!fs.existsSync(dir)) {
-    return;
-  }
-
-  for (const file of fs.readdirSync(dir)) {
-    if (file === '.git') {
-      continue;
-    }
-
-    fs.rmSync(path.resolve(dir, file), { recursive: true, force: true });
-  }
-}
