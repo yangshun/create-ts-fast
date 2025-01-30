@@ -20,6 +20,9 @@
       }
     }
   },
+  "files": [
+    "dist"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "tsup",
@@ -31,9 +34,6 @@
     "verify": "npm run typecheck && npm run test && npm run build",
     "prepublishOnly": "npm run verify"
   },
-  "files": [
-    "dist"
-  ],
   "devDependencies": {
     "@testing-library/react": "^16.2.0",
     "@types/react": "^19.0.8",
