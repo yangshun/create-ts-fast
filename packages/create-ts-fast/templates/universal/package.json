@@ -2,6 +2,7 @@
   "name": "ts-fast-universal",
   "version": "0.0.0",
   "description": "Boilerplate for building npm packages in TypeScript",
+  "author": "yangshun",
   "license": "MIT",
   "type": "module",
   "main": "dist/index.js",

@@ -3,6 +3,7 @@
 // Modified from: https://github.com/vitejs/vite/blob/main/packages/create-vite/src/index.ts
 
 import minimist from 'minimist';
+import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -171,6 +172,16 @@ async function main() {
   );
 
   pkg.name = packageName || getProjectName();
+  pkg.version = '0.0.0';
+  try {
+    const name = execSync('git config user.name').toString().trim();
+    const email = execSync('git config user.email').toString().trim();
+    if (name) {
+      pkg.author = email ? `${name} <${email}>` : name;
+    }
+  } catch {
+    // Do nothing
+  }
 
   write('package.json', JSON.stringify(pkg, null, 2) + '\n');
 
