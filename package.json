@@ -2,6 +2,10 @@
   "name": "@yangshun/create-ts-fast",
   "version": "0.0.0",
   "description": "Create TypeScript packages really fast",
+  "author": "yangshun",
+  "scripts": {
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,mdx}\""
+  },
   "keywords": [
     "typescript",
     "npm",
@@ -9,6 +13,8 @@
     "package",
     "boilerplate"
   ],
-  "author": "yangshun",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^3.4.2"
+  }
 }
