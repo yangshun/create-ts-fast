@@ -198,11 +198,6 @@ async function main() {
     // Do nothing
   }
 
-  // Set binary command if it exists in template
-  if (pkg.bin) {
-    pkg.bin = { [pkgName]: pkg.main };
-  }
-
   write('package.json', JSON.stringify(pkg, null, 2) + '\n');
 
   const cdProjectName = path.relative(cwd, root);
