@@ -1,14 +1,12 @@
 #!/usr/bin/env node
 
 // Stolen from https://github.com/vitejs/vite/blob/main/packages/create-vite/src/index.ts
-
 import minimist from 'minimist';
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import chalk from 'chalk';
-import prompts from 'prompts';
+import * as p from '@clack/prompts';
 import {
   copy,
   formatTargetDir,
@@ -18,8 +16,6 @@ import {
   rmdirPreserveGit,
   toValidPackageName,
 } from './utils';
-
-const { red, reset, white } = chalk;
 
 const argv = minimist<{
   template?: string;
@@ -36,113 +32,148 @@ const renameFiles: Record<string, string | undefined> = {
 
 const defaultTargetDir = 'ts-fast-project';
 
-// TODO: read from file system
-const TEMPLATES = ['universal', 'cli', 'react-hooks'];
+// Sync with templates dir
+type Template = 'universal' | 'cli' | 'react-hooks';
+const templateOptions: Record<
+  Template,
+  Readonly<{ label: string; value: Template; hint: string }>
+> = {
+  universal: {
+    label: 'Universal utility',
+    value: 'universal',
+    hint: 'Runs on both client and server, e.g. axios, clsx, lodash, zod',
+  },
+  cli: {
+    label: 'Command line utility',
+    value: 'cli',
+    hint: 'Runs in the terminal, e.g. eslint, tsc, vite, jest',
+  },
+  'react-hooks': {
+    label: 'React hooks',
+    value: 'react-hooks',
+    hint: 'React hooks collections, e.g. react-use, usehooks-ts',
+  },
+};
+const templateValues = Object.values(templateOptions).map(({ value }) => value);
+
+type PromptResults = {
+  overwrite: 'no' | 'yes' | 'ignore';
+  packageName: string;
+  template: string;
+};
 
 async function main() {
   const argTargetDir = formatTargetDir(argv._[0]);
   const argTemplate = argv.template || argv.t;
 
-  let targetDir = argTargetDir || defaultTargetDir;
-  const getProjectName = () => path.basename(path.resolve(targetDir));
+  function normalizeTargetDir(dir: string) {
+    return process.env.npm_lifecycle_event === 'dev'
+      ? path.join('__scaffold__', dir)
+      : path.join(dir);
+  }
 
-  let result: prompts.Answers<
-    'projectName' | 'overwrite' | 'packageName' | 'template'
-  >;
+  let targetDir = normalizeTargetDir(argTargetDir || defaultTargetDir);
+  function getProjectName() {
+    return path.basename(path.resolve(targetDir));
+  }
+
+  let results: PromptResults = {
+    overwrite: 'no',
+    packageName: getProjectName(),
+    template: '',
+  };
 
   try {
-    result = await prompts(
-      [
-        {
-          type: argTargetDir ? null : 'text',
-          name: 'projectName',
-          message: reset('Project name:'),
-          initial: defaultTargetDir,
-          onState: (state) => {
-            targetDir = formatTargetDir(state.value) || defaultTargetDir;
+    if (!argTargetDir) {
+      const targetDirResponse = await p.text({
+        message: 'Enter your project name',
+        placeholder: 'my-ts-project',
+      });
+
+      if (p.isCancel(targetDirResponse)) {
+        p.cancel('Operation cancelled.');
+        process.exit(1);
+      }
+
+      targetDir = normalizeTargetDir(
+        formatTargetDir(targetDirResponse) || defaultTargetDir,
+      );
+    }
+
+    if (fs.existsSync(targetDir) && !isEmptyDir(targetDir)) {
+      const overwriteResponse = await p.select<PromptResults['overwrite']>({
+        message:
+          (targetDir === '.'
+            ? 'Current directory'
+            : `Target directory "${targetDir}"`) +
+          ' is not empty. Please choose how to proceed:',
+        initialValue: results.overwrite,
+        options: [
+          {
+            label: 'Cancel operation',
+            value: 'no',
           },
-        },
-        {
-          type: () =>
-            !fs.existsSync(targetDir) || isEmptyDir(targetDir)
-              ? null
-              : 'select',
-          name: 'overwrite',
-          message: () =>
-            (targetDir === '.'
-              ? 'Current directory'
-              : `Target directory "${targetDir}"`) +
-            ` is not empty. Please choose how to proceed:`,
-          initial: 0,
-          choices: [
-            {
-              title: 'Cancel operation',
-              value: 'no',
-            },
-            {
-              title: 'Remove existing files and continue',
-              value: 'yes',
-            },
-            {
-              title: 'Ignore files and continue',
-              value: 'ignore',
-            },
-          ],
-        },
-        {
-          type: (_, { overwrite }: { overwrite?: string }) => {
-            if (overwrite === 'no') {
-              throw new Error(red('✖') + ' Operation cancelled');
-            }
-            return null;
+          {
+            label: 'Remove existing files and continue',
+            value: 'yes',
           },
-          name: 'overwriteChecker',
-        },
-        {
-          type: () => (isValidPackageName(getProjectName()) ? null : 'text'),
-          name: 'packageName',
-          message: reset('Package name:'),
-          initial: () => toValidPackageName(getProjectName()),
-          validate: (dir) =>
-            isValidPackageName(dir) || 'Invalid package.json name',
-        },
-        {
-          type:
-            argTemplate && TEMPLATES.includes(argTemplate) ? null : 'select',
-          name: 'template',
-          message:
-            typeof argTemplate === 'string' && !TEMPLATES.includes(argTemplate)
-              ? reset(
-                  `"${argTemplate}" isn't a valid template. Please choose from below: `,
-                )
-              : reset('Select a template:'),
-          initial: 0,
-          choices: TEMPLATES.map((template) => {
-            return {
-              title: white(template),
-              value: template,
-            };
-          }),
-        },
-      ],
-      {
-        onCancel: () => {
-          throw new Error(red('✖') + ' Operation cancelled');
-        },
-      },
-    );
+          {
+            label: 'Ignore files and continue',
+            value: 'ignore',
+          },
+        ],
+      });
+
+      if (p.isCancel(overwriteResponse) || overwriteResponse === 'no') {
+        p.cancel('Operation cancelled.');
+        process.exit(1);
+      }
+
+      results.overwrite = overwriteResponse;
+    }
+
+    if (!isValidPackageName(getProjectName())) {
+      const packageNameResponse = await p.text({
+        message: 'Package name',
+        initialValue: toValidPackageName(getProjectName()),
+        validate: (pkgName) =>
+          isValidPackageName(pkgName) ? undefined : 'Invalid package.json name',
+      });
+
+      if (p.isCancel(packageNameResponse)) {
+        p.cancel('Operation cancelled.');
+        process.exit(1);
+      }
+
+      results.packageName = packageNameResponse;
+    }
+
+    if (!argTemplate || !templateValues.includes(argTemplate)) {
+      const templateResponse = await p.select({
+        message:
+          typeof argTemplate === 'string' &&
+          !templateValues.includes(argTemplate as Template)
+            ? `"${argTemplate}" isn't a valid template. Please choose from the following:`
+            : 'Select a template:',
+        options: Object.values(templateOptions),
+      });
+
+      if (p.isCancel(templateResponse)) {
+        p.cancel('Operation cancelled.');
+        process.exit(1);
+      }
+
+      results.template = templateResponse;
+    }
   } catch (cancelled: any) {
-    console.log(cancelled.message);
+    p.log.error(cancelled.message);
     return;
   }
 
   // User choice associated with prompts
-  const { template, overwrite, packageName } = result;
+  const { template, overwrite, packageName } = results;
 
-  const root =
-    process.env.npm_lifecycle_event === 'dev'
-      ? path.join(cwd, '__scaffold__', targetDir)
-      : path.join(cwd, targetDir);
+  const root = path.join(cwd, targetDir);
 
   if (overwrite === 'yes') {
     rmdirPreserveGit(root);
@@ -150,9 +181,7 @@ async function main() {
     fs.mkdirSync(root, { recursive: true });
   }
 
-  
-
-  console.log(`\nScaffolding project in ${root}...`);
+  p.log.info(`Scaffolding project in ${root}...`);
 
   const templateDir = path.resolve(
     fileURLToPath(import.meta.url),
@@ -183,7 +212,7 @@ async function main() {
 
   const pkgName = packageName || getProjectName();
   pkg.name = pkgName;
-  
+
   pkg.version = '0.0.0';
 
   // Attempt to fill author field
@@ -201,12 +230,13 @@ async function main() {
   write('package.json', JSON.stringify(pkg, null, 2) + '\n');
 
   const cdProjectName = path.relative(cwd, root);
-  console.log(`\nDone. Now run:\n`);
+  p.log.success('Done. Now run:');
+  console.log();
 
   // Print installation commands
   if (root !== cwd) {
     console.log(
-      `  cd ${
+      `   cd ${
         cdProjectName.includes(' ') ? `"${cdProjectName}"` : cdProjectName
       }`,
     );
@@ -216,15 +246,14 @@ async function main() {
   const pkgManager = pkgInfo ? pkgInfo.name : 'npm';
   switch (pkgManager) {
     case 'yarn':
-      console.log('  yarn');
-      console.log('  yarn dev');
+      console.log('   yarn');
+      console.log('   yarn dev');
       break;
     default:
-      console.log(`  ${pkgManager} install`);
-      console.log(`  ${pkgManager} run dev`);
+      console.log(`   ${pkgManager} install`);
+      console.log(`   ${pkgManager} run dev`);
       break;
   }
-  console.log();
 
   process.exit(0);
 }
@@ -232,14 +261,14 @@ async function main() {
 try {
   await main();
 } catch (err) {
-  console.error('Aborting installation...');
+  p.log.error('Aborting installation...');
   if (err instanceof Error) {
-    console.error(err);
+    p.log.error(err.message);
   } else {
-    console.error(
+    p.log.error(
       'An unknown error has occurred. Please open a GitHub issue with the following:',
     );
-    console.log(err);
+    p.log.error(String(err));
   }
 
   process.exit(1);
