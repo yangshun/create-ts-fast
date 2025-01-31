@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// Modified from: https://github.com/vitejs/vite/blob/main/packages/create-vite/src/index.ts
+// Stolen from https://github.com/vitejs/vite/blob/main/packages/create-vite/src/index.ts
 
 import minimist from 'minimist';
 import { execSync } from 'node:child_process';
@@ -37,7 +37,7 @@ const renameFiles: Record<string, string | undefined> = {
 const defaultTargetDir = 'ts-fast-project';
 
 // TODO: read from file system
-const TEMPLATES = ['universal', 'react-hooks'];
+const TEMPLATES = ['universal', 'cli', 'react-hooks'];
 
 async function main() {
   const argTargetDir = formatTargetDir(argv._[0]);
@@ -150,8 +150,7 @@ async function main() {
     fs.mkdirSync(root, { recursive: true });
   }
 
-  const pkgInfo = pkgFromUserAgent(process.env.npm_config_user_agent);
-  const pkgManager = pkgInfo ? pkgInfo.name : 'npm';
+  
 
   console.log(`\nScaffolding project in ${root}...`);
 
@@ -177,13 +176,17 @@ async function main() {
     write(file);
   }
 
-  // Write package.json to target dir
+  // Write personalized package.json to target dir
   const pkg = JSON.parse(
     fs.readFileSync(path.join(templateDir, `package.json`), 'utf-8'),
   );
 
-  pkg.name = packageName || getProjectName();
+  const pkgName = packageName || getProjectName();
+  pkg.name = pkgName;
+  
   pkg.version = '0.0.0';
+
+  // Attempt to fill author field
   try {
     const name = execSync('git config user.name').toString().trim();
     const email = execSync('git config user.email').toString().trim();
@@ -195,11 +198,17 @@ async function main() {
     // Do nothing
   }
 
+  // Set binary command if it exists in template
+  if (pkg.bin) {
+    pkg.bin = { [pkgName]: pkg.main };
+  }
+
   write('package.json', JSON.stringify(pkg, null, 2) + '\n');
 
   const cdProjectName = path.relative(cwd, root);
   console.log(`\nDone. Now run:\n`);
 
+  // Print installation commands
   if (root !== cwd) {
     console.log(
       `  cd ${
@@ -208,6 +217,8 @@ async function main() {
     );
   }
 
+  const pkgInfo = pkgFromUserAgent(process.env.npm_config_user_agent);
+  const pkgManager = pkgInfo ? pkgInfo.name : 'npm';
   switch (pkgManager) {
     case 'yarn':
       console.log('  yarn');

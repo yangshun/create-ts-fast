@@ -18,7 +18,7 @@
     "dev": "tsup --watch",
     "typecheck": "tsc",
     "verify": "pnpm run typecheck && pnpm run build",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist __scaffold__",
     "prepublishOnly": "pnpm verify"
   },
   "keywords": [
