@@ -51,7 +51,7 @@ const templateOptions: Record<
   'react-hooks': {
     label: 'React hooks',
     value: 'react-hooks',
-    hint: 'React hooks collections, e.g. react-use, usehooks-ts',
+    hint: 'Custom React hooks, e.g. react-use, usehooks-ts',
   },
 };
 const templateValues = Object.values(templateOptions).map(({ value }) => value);

@@ -8,10 +8,11 @@ Create React App but for creating TypeScript-based packages to be published to t
 npm create ts-fast@latest
 ```
 
-Currently supported templates:
+Supported templates:
 
-- **Universal**: Platform-agnostic utilities intended to run on both server and client (e.g. [`axios`](https://github.com/axios/axios), [`lodash`](https://github.com/lodash/lodash), [`clsx`](https://github.com/lukeed/clsx), [`zod`](https://github.com/colinhacks/zod))
-- **React hooks**: Custom React hooks (e.g. [`react-use`](https://github.com/streamich/react-use), [`usehooks-ts`](https://github.com/juliencrn/usehooks-ts))
+- **Universal utility**: Platform-agnostic utilities intended to run on both server and client, e.g. [`axios`](https://github.com/axios/axios), [`lodash`](https://github.com/lodash/lodash), [`clsx`](https://github.com/lukeed/clsx), [`zod`](https://github.com/colinhacks/zod)
+- **Command line utility**: Runs in the terminal, e.g. [`eslint`](https://github.com/eslint/eslint), [`vite`](https://github.com/vitejs/vite), [`jest`](https://github.com/jestjs/jest)
+- **React hooks**: Custom React hooks, e.g. [`react-use`](https://github.com/streamich/react-use), [`usehooks-ts`](https://github.com/juliencrn/usehooks-ts)
 
 ## Features
 
@@ -70,7 +71,7 @@ bun create ts-fast@latest
 
 ### Scaffolded project structure
 
-Scaffolded projects have these few base files:
+Scaffolded projects have these base files:
 
 ```
 ├── .github/workflows/ci.yml
