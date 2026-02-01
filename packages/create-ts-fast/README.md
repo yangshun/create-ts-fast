@@ -1,5 +1,8 @@
 <img src="https://raw.githubusercontent.com/yangshun/create-ts-fast/main/packages/create-ts-fast/assets/logo.png" alt="Create TS Fast Logo" />
 
+> [!NOTE]
+> [tsdown](https://tsdown.dev/) is a better tsup (bundler that this project relies on) and comes with [create-tsdown](https://tsdown.dev/guide/getting-started#starter-templates), a scaffolding util that is similar to this project. We now recommend using [create-tsdown](https://tsdown.dev/guide/getting-started#starter-templates) instead.
+
 # Create TypeScript Fast
 
 Create React App but for creating TypeScript-based packages to be published to the npm registry.
